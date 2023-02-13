@@ -10,8 +10,8 @@
     Captura de dados na rede pra deixar salvo e ser usada em momentos que for
     instâncida.
 */
-class vision
-    {
+class vision{
+
 public:
     vision(QString visionAddres, quint16 port);
     void run(); //método responsável por fazer a captura dos dados e fazer a interpretação desses dados

@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = comunicacao1.0.0
-DISTDIR = /home/arthur/Documentos/maraca_trainee_prog/comunicacao/comunicacao/.tmp/comunicacao1.0.0
+DISTDIR = /home/arthur/Documentos/maraca_trainee_prog/maracatronicsProjeto/comunicacao_projeto/.tmp/comunicacao1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) -lprotobuf /usr/lib/x86_64-linux-gnu/libQt5Network.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lpthread   
@@ -135,7 +135,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		../.qmake.stash \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -245,7 +245,7 @@ Makefile: comunicacao.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		../.qmake.stash \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -322,7 +322,7 @@ Makefile: comunicacao.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
-../.qmake.stash:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -367,6 +367,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) $(TARGET) 
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -445,24 +446,24 @@ ssl_vision_wrapper_tracked.pb.o: ../protobufs/ssl_vision_wrapper_tracked.pb.cc .
 
 actuator.o: actuator/actuator.cpp actuator/actuator.h \
 		/home/arthur/Documentos/maraca_trainee_prog/comunicacao/protobufs/grSim_Packet.pb.h \
-		../protobufs/grSim_Commands.pb.h \
-		../protobufs/grSim_Replacement.pb.h
+		../../comunicacao/protobufs/grSim_Commands.pb.h \
+		../../comunicacao/protobufs/grSim_Replacement.pb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o actuator.o actuator/actuator.cpp
 
 main.o: main.cpp vision/vision.h \
 		/home/arthur/Documentos/maraca_trainee_prog/comunicacao/protobufs/ssl_vision_wrapper.pb.h \
-		../protobufs/ssl_vision_detection.pb.h \
-		../protobufs/ssl_vision_geometry.pb.h \
+		../../comunicacao/protobufs/ssl_vision_detection.pb.h \
+		../../comunicacao/protobufs/ssl_vision_geometry.pb.h \
 		actuator/actuator.h \
 		/home/arthur/Documentos/maraca_trainee_prog/comunicacao/protobufs/grSim_Packet.pb.h \
-		../protobufs/grSim_Commands.pb.h \
-		../protobufs/grSim_Replacement.pb.h
+		../../comunicacao/protobufs/grSim_Commands.pb.h \
+		../../comunicacao/protobufs/grSim_Replacement.pb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 vision.o: vision/vision.cpp vision/vision.h \
 		/home/arthur/Documentos/maraca_trainee_prog/comunicacao/protobufs/ssl_vision_wrapper.pb.h \
-		../protobufs/ssl_vision_detection.pb.h \
-		../protobufs/ssl_vision_geometry.pb.h
+		../../comunicacao/protobufs/ssl_vision_detection.pb.h \
+		../../comunicacao/protobufs/ssl_vision_geometry.pb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vision.o vision/vision.cpp
 
 ####### Install
