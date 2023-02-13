@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     vision *visao = new vision("224.5.23.2",10020);
     Actuator *atuador = new Actuator("127.0.0.1", 20011);
     int c;
-    float posicao[2] = {0.0,0.0};
+    float targetPosition[2] = {0.0,0.0};
     float distancia[2][2];
     //fazer os floats e dobles terem apenas 1 casa decimal
     std::cout << std::fixed << std::setprecision(2);
@@ -23,6 +23,8 @@ int main(int argc, char *argv[])
     float vw = 0.0;
     float raio;
     double angulo;
+    float ang;
+
 
     const double pi = std::acos(-1);
 
@@ -49,29 +51,23 @@ da posição da bola. */
 //          }
 
         //parte 2: seguir a bola
+        targetPosition[0] = (ball.x() - blueRobot.x())/1000;
+        targetPosition[1] = (ball.y() - blueRobot.y())/1000;
 
-        posicao[0] = (ball.x() - blueRobot.x())/1000;
-        posicao[1] = (ball.y() - blueRobot.y())/1000;
-
-        raio = pow(posicao[0],2) + pow(posicao[1],2);
+        raio = pow(targetPosition[0],2) + pow(targetPosition[1],2);
         raio = sqrt(raio);
 
-        angulo = (posicao[1])/(posicao[0]);
-        angulo = (tan(angulo)*pi/180)/100;
-        float angulo;
+        ang = blueRobot.orientation();
 
-        vx = posicao[0];
-        vy = posicao[1];
+        angulo = (atan((targetPosition[1])/(targetPosition[0])));
 
-        atuador->sendCommand(false,3,vx,vy,vw);
+        vx = targetPosition[0]*cos(ang) + targetPosition[1]*sin(ang);
+        vy = targetPosition[1]*cos(ang) - targetPosition[0]*sin(ang);
 
-        std::cout << "raio:      " << raio << std::endl;
-        std::cout << "angulo:    " << angulo << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(16));
 
+        atuador->sendCommand(false,3,vx,vy,0.0);
 
-//        posição robô azul
-//        SSL_DetectionRobot blueRobot = visao->getRobot(false,0);
-//        std::cout << "robot BLUE 0: " << blueRobot.x()<< " | " << blueRobot.y() << std::endl;
 
         std::this_thread::sleep_for(std::chrono::milliseconds(16));
     }
